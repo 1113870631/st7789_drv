@@ -23,8 +23,28 @@
 int main(void)
 
 {
-     uint8_t tmp=0;
+
+     rt_thread_delay(5000);
      st7789_hard_init();
-     st7789_read_id1(&tmp);
+
+      if(st7789_connect_check())
+      {
+          rt_kprintf("connect_ok!\n");
+      }
+      else {
+          rt_kprintf("st7789_check_connect_fail!\n");
+     }
+      st7789_command_init();
+      LCD_Address_Set(0, 0, LCD_H, LCD_W);
+      while(1){
+          st7789_s_16data(0xfff);
+          //HAL_Delay(1);
+      }
+
+
+
     return RT_EOK;
 }
+
+
+
